@@ -124,7 +124,8 @@ function checkWin() {
     game = "won"
     console.log(audio)
   } else if (allowedGuesses === 0) {
-    loser()
+    timerloss()
+    setTimeout(initializeGame,15000)
     document.getElementById("result").innerText = "you lost";
   }
 }
