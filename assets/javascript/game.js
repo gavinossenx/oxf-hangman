@@ -64,6 +64,7 @@ function reset(){document.getElementById("characterinfo").innerText ="";
 document.getElementById("result").innerText ="";
 game =""
 audio.pause();
+audio.currentTime = 0;;
 }
 var losstimer = setTimeout(timerloss,55000)
 var time = setTimeout(initializeGame,60000)
@@ -117,7 +118,7 @@ function checkWin() {
     setTimeout(initializeGame,15000)
     clearInterval(time)
     document.getElementById("result").innerText = "you win!";
-    var audio = new Audio('./assets/media/overwatch.ogg');
+    
     audio.play();
     winreset()
     game = "won"
