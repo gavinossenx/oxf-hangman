@@ -34,6 +34,20 @@ function Character(name,photo){
   this.name = name 
   this.photo = photo
 }
+
+var stats = {win:0,loss:0,totalgames:0};
+var totalgame =function() {document.getElementById("totalgames").innerText ="total games:" +stats.totalgames}
+var winner =function(){stats.win++;stats.totalgames++;userwins();totalgame()
+}
+var loser =function(){stats.loss++;stats.totalgames++;userloses();totalgame()
+}
+var userwins =function(){
+  document.getElementById("wins").innerHTML = "wins:"+stats.win;
+}
+var userloses =function(){
+  document.getElementById("losses").innerHTML= "losses:"+stats.loss
+}
+var audio = new Audio('./assets/media/overwatch.ogg')
 var mccree = new Character("mccree","./assets/javascript/overwatch.jpg")
 var word;
 var allowedGuesses;
@@ -46,9 +60,24 @@ var lettersGuessedElement = document.getElementById('lettersGuessed');
 var randomNumber = function(len){
    return Math.floor(Math.random() * len)
 };
+function reset(){document.getElementById("characterinfo").innerText ="";
+document.getElementById("result").innerText ="";
+game =""
+audio.pause();
+}
+var losstimer = setTimeout(timerloss,55000)
+var time = setTimeout(initializeGame,60000)
+function winreset(){
+  document.getElementById("characterinfo").innerText ="Congradulations! New game starting in 15 seconds"}
 
+function timerloss(){
+  loser()
+   document.getElementById("characterinfo").innerText ="GAME OVER. YOU HAVE RUN OUT OF TIME.New Game Starting in 15 Seconds"}; 
 function initializeGame() {
-  setInterval(function(){ document.getElementById("characterinfo").innerText ="GAME OVER. YOU HAVE RUN OUT OF TIME.REFRESH PAGE TO RESTART"; }, 30000);
+  reset()
+  lettersGuessedElement.innerText =""
+  setTimeout(timerloss,45000)
+  setTimeout(initializeGame,60000)
      word = words[randomNumber(words.length)]
   allowedGuesses = 15;
   wrongGuesses = [];
@@ -62,7 +91,6 @@ wordElement.innerText = "word " +correctGuesses
   wordElement.innerText = 'word ' +correctGuesses.join(' ');
   letterCountElement.innerHTML = allowedGuesses;
 }
-
 function updateGuesses(letter) {
   // subtract from guesses left
   letterCountElement.innerHTML = allowedGuesses;
@@ -82,14 +110,20 @@ function updateGuesses(letter) {
     wordElement.innerHTML ="word " +correctGuesses.join(' ');
   }
 }
-
+ var game;
 function checkWin() {
   if (correctGuesses.indexOf('_') === -1) {
+    winner()
+    setTimeout(initializeGame,15000)
+    clearInterval(time)
     document.getElementById("result").innerText = "you win!";
     var audio = new Audio('./assets/media/overwatch.ogg');
+    audio.play();
+    winreset()
+    game = "won"
     console.log(audio)
-     audio.play();
   } else if (allowedGuesses === 0) {
+    loser()
     document.getElementById("result").innerText = "you lost";
   }
 }
@@ -97,9 +131,8 @@ function checkWin() {
 document.onkeyup = function (event) {
   var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
   updateGuesses(letterGuessed);
-  checkWin();
+if(game != "won"){checkWin();}
 };
-
 initializeGame();
 
 
