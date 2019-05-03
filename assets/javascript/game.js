@@ -1,5 +1,5 @@
 var words = [
-    new Character("reaper","<img src=reaper.png/>"),
+    new Character("reaper","./assets/images/reaper.png"),
     new Character("lucio","./assets/images/lucio.jpg"),
     new Character("moira","./assets/images/moira.jpg"),
     new Character("reinhardt","assets/images/reinhardt.jpg"),
@@ -116,7 +116,7 @@ function updateGuesses(letter) {
 function checkWin() {
   if (correctGuesses.indexOf('_') === -1) {
     winner()
-    document.getElementById("photo").insertAdjacentHTML = character.photo
+    document.getElementById("photo"). = character.photo
     setTimeout(initializeGame,15000)
     clearInterval(time)
     document.getElementById("result").innerText = "you win!";
