@@ -1,5 +1,5 @@
 var words = [
-    new Character("reaper","./assets/images/reaper.png"),
+    new Character("reaper","<img src=reaper.png/>"),
     new Character("lucio","./assets/images/lucio.jpg"),
     new Character("moira","./assets/images/moira.jpg"),
     new Character("reinhardt","assets/images/reinhardt.jpg"),
@@ -20,7 +20,7 @@ var words = [
     new Character("doomfist","assets/images/doomfist.jpg"),
     new Character("ashe","assets/images/ashe.jpg"),
     new Character("mei","assets/images/mei.jpg"),
-    new Character("sombra","assets/images/sp,bra.jpeg"),
+    new Character("sombra","assets/images/sombra.jpeg"),
     new Character("winston","assets/images/winston.png"),
     new Character("pharah","assets/images/pharah.jpeg"),
     new Character("junkrat","assets/images/junkrat.jpg"),
@@ -48,7 +48,6 @@ var userloses =function(){
   document.getElementById("losses").innerHTML= "losses:"+stats.loss
 }
 var audio = new Audio('./assets/media/overwatch.ogg')
-var mccree = new Character("mccree","./assets/javascript/overwatch.jpg")
 var word;
 var allowedGuesses;
 var correctGuesses;
@@ -81,13 +80,13 @@ function initializeGame() {
   lettersGuessedElement.innerText =""
   setTimeout(timerloss,45000)
   setTimeout(initializeGame,60000)
-     word = words[randomNumber(words.length)]
+     character = words[randomNumber(words.length)]
   allowedGuesses = 15;
   wrongGuesses = [];
   correctGuesses = [];
 wordElement.innerText = "word " +correctGuesses
   // correct guess to underscore
-  for (var i = 0; i < word.length; i++) {
+  for (var i = 0; i < character.name.length; i++) {
     correctGuesses.push('_');
   }
 
@@ -98,14 +97,14 @@ function updateGuesses(letter) {
   // subtract from guesses left
   letterCountElement.innerHTML = allowedGuesses;
 
-  if (word.indexOf(letter) === -1) { 
+  if (character.name.indexOf(letter) === -1) { 
     wrongGuesses.push(letter);
     allowedGuesses--; // update letters guessed
     lettersGuessedElement.innerHTML = wrongGuesses.join(', ');
   } else { // letter IS in the word
     // replace underscore with the letter
-    for (var i = 0; i < word.length; i++) {
-      if (word[i] === letter) {
+    for (var i = 0; i < character.name.length; i++) {
+      if (character.name[i] === letter) {
         correctGuesses[i] = letter;
       }
     }
@@ -117,7 +116,7 @@ function updateGuesses(letter) {
 function checkWin() {
   if (correctGuesses.indexOf('_') === -1) {
     winner()
-    
+    document.getElementById("photo").insertAdjacentHTML = character.photo
     setTimeout(initializeGame,15000)
     clearInterval(time)
     document.getElementById("result").innerText = "you win!";
@@ -132,7 +131,7 @@ function checkWin() {
     document.getElementById("result").innerText = "you lost";
   }
 }
-if (game="won"&&correctGuesses===["m","c","r","e","e"])document.getElementById("result").innertext = +mccree
+
 
 document.onkeyup = function (event) {
   var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
