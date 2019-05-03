@@ -1,34 +1,34 @@
 var words = [
-    "reaper",
-    "lucio",
-    "moira",
-    "reinhardt",
-    "tracer",
-    "widowmaker",
-    "wreckingball",
-    "dva",
-    "orisa",
-    "zarya",
-    "zenyatta",
-    "mercy",
-    "torbjorn",
-    "symmetra",
-    "genji",
-    "hanzo",
-    "brigitte",
-    "bastion",
-    "doomfist",
-    "ashe",
-    "mei",
-    "sombra",
-    "winston",
-    "pharah",
-    "junkrat",
-    "soldier76",
-    "baptiste",
-    "ana",
-    "roadhog",
-    "mccree"
+    new Character("reaper","./assets/images/reaper.png"),
+    new Character("lucio","./assets/images/lucio.jpg"),
+    new Character("moira","./assets/images/moira.jpg"),
+    new Character("reinhardt","assets/images/reinhardt.jpg"),
+    new Character("tracer","assets/images/tracer.jpg"),
+    new Character("widowmaker","assets/images/widowmaker.jpg"),
+    new Character("wreckingball","assets/images/wreckingball.jpeg"),
+    new Character("dva","assets/images/dva.jpg"),
+    new Character("orisa","assets/images/orisa.jpeg"),
+    new Character("zarya","assets/images/zarya.jpg"),
+    new Character("zenyatta","assets/images/zenyatta.jpg"),
+    new Character("mercy","assets/images/mercy.jpg"),
+    new Character("torbjorn","assets/images/torbjorn.jpg"),
+    new Character("symmetra","assets/images/symmetra.jpg"),
+    new Character("genji","assets/images/genji.jpg"),
+    new Character("hanzo","assets/images/hazno.jpeg"),
+    new Character("brigitte","assets/images/briggite.jpg"),
+    new Character("bastion","assets/images/bastion.jpg"),
+    new Character("doomfist","assets/images/doomfist.jpg"),
+    new Character("ashe","assets/images/ashe.jpg"),
+    new Character("mei","assets/images/mei.jpg"),
+    new Character("sombra","assets/images/sp,bra.jpeg"),
+    new Character("winston","assets/images/winston.png"),
+    new Character("pharah","assets/images/pharah.jpeg"),
+    new Character("junkrat","assets/images/junkrat.jpg"),
+    new Character("soldier76","assets/images/soldier76.jpeg"),
+    new Character("baptiste","assets/images/baptiste.jpg"),
+    new Character("ana","assets/images/ana.jpeg"),
+    new Character("roadhog","assets/images/roadhog.png"),
+    new Character("mccree","assets/images/mccree.jpg"),
 ]
 function Character(name,photo){
   this.name = name 
@@ -60,6 +60,7 @@ var lettersGuessedElement = document.getElementById('lettersGuessed');
 var randomNumber = function(len){
    return Math.floor(Math.random() * len)
 };
+
 function reset(){document.getElementById("characterinfo").innerText ="";
 document.getElementById("result").innerText ="";
 game =""
@@ -70,6 +71,7 @@ var losstimer = setTimeout(timerloss,55000)
 var time = setTimeout(initializeGame,60000)
 function winreset(){
   document.getElementById("characterinfo").innerText ="Congradulations! New game starting in 15 seconds"}
+  document.getElementById
 
 function timerloss(){
   loser()
@@ -115,6 +117,7 @@ function updateGuesses(letter) {
 function checkWin() {
   if (correctGuesses.indexOf('_') === -1) {
     winner()
+    
     setTimeout(initializeGame,15000)
     clearInterval(time)
     document.getElementById("result").innerText = "you win!";
@@ -129,6 +132,7 @@ function checkWin() {
     document.getElementById("result").innerText = "you lost";
   }
 }
+if (game="won"&&correctGuesses===["m","c","r","e","e"])document.getElementById("result").innertext = +mccree
 
 document.onkeyup = function (event) {
   var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
@@ -140,7 +144,7 @@ initializeGame();
 
 
 
-
+//get picture when you win
 
 
 
